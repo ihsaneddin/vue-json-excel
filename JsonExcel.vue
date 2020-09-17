@@ -58,12 +58,15 @@ export default {
     fetch: {
       type: Function,
     },
+    promisedData: {
+     type: Promise
+    },
     meta: {
       type: Array,
       default: () => []
-    }, 
+    },
     worksheet: {
-      type: String, 
+      type: String,
       default: "Sheet1"
     },
     //event before generate was called
@@ -94,8 +97,14 @@ export default {
         await this.beforeGenerate();
       }
       let data = this.data;
-      if(typeof this.fetch === 'function' || !data)
+      if(!data){
+      	if(typeof this.fetch === 'function')
          data = await this.fetch();
+
+      	if (this.promisedData){
+        	data = await this.promisedData
+      	}
+      }
 
       if (!data || !data.length) {
         return;
@@ -273,17 +282,17 @@ export default {
       const field = typeof key   !== "object" ? key : key.field;
       let indexes = typeof field !== "string" ? []  : field.split(".");
       let value   = this.defaultValue;
-    
+
       if (!field)
 	      value = item;
       else if( indexes.length > 1 )
         value = this.getValueFromNestedItem(item, indexes);
       else
         value = this.parseValue(item[field]);
-      
+
       if( key.hasOwnProperty('callback'))
         value = this.getValueFromCallback(value, key.callback);
-      
+
       return value;
     },
 
