@@ -35,8 +35,8 @@ In your template
 
 | Name             | Type  | Description |
 | :---             | :---: | ---         |
-| data  | Array  | Data to be exported | 
-| fields  | Object  | fields inside the Json Object that you want to export. If no given, all the properties in the Json  are exported | 
+| data  | Array  | Data to be exported |
+| fields  | Object  | fields inside the Json Object that you want to export. If no given, all the properties in the Json  are exported |
 | export-fields (exportFields)    | Object | this prop is used to fix the problem with other components that use the variable fields, like vee-validate. exportFields works exactly like fields  |
 | type    | string | mime type [xls, csv], default: xls |
 | name    | string | filename to export, deault: data.xls |
@@ -197,7 +197,7 @@ In case you need to fetch data from the server, you could use the fetch prop tha
 ```js
 <template>
   <div id="app">
-    
+
     <hr>
     <h2>Fetch Example</h2>
     <downloadexcel
@@ -304,4 +304,5 @@ MIT
 
 
 #### Status
-This project is in an early stage of development. Any contribution is welcome :D
+Forked from [jecovier/vue-json-excel](https://github.com/jecovier/vue-json-excel), but the repo didn't seem to be maintained.
+- Added promise support for data
